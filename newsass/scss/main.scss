@@ -1,0 +1,74 @@
+@import './resets';
+@import './variables';
+
+@function fontFamily($font-name){
+  @return map-get($font-look, $font-name);
+}
+
+@mixin flexColumn ($direction){
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin mobile {
+  @media(max-width: $mobile){
+    @content;
+  }
+}
+
+@mixin mobile700{
+  @media(max-width: $mobile-width){
+    @content;
+  }
+}
+
+body{
+  background-color: $primary-color;
+}
+
+
+.main{
+  @include flexCenter;
+  width: 70%;
+  margin: 0 auto;
+
+  #{&}_paragraph1{
+    color: $text-color;
+    font-size: map-get($text-size, "medium");
+    font-family: fontFamily(geologica);
+    // font-style: oblique;
+    // font-weight: 500;
+    
+
+    &:hover{
+      color: $accent;
+    }
+  }
+
+  #{&}_paragraph2{
+    @extend .main_paragraph1;
+
+    &:hover{
+      color: $primary;
+    }
+  }
+  @include mobile{
+    flex-direction: column;
+  }
+}
+
+// .main_paragraph2{
+//   background-color: red;
+
+//   @include mobile700{
+//     background-color: aqua;
+//   }
+// }
